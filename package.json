@@ -1,0 +1,20 @@
+{
+  "name": "react-presentation",
+  "version": "0.1.0",
+  "description": "A reveal.js insipired component library for building presentations in React",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheKnarf/react-presentation.git"
+  },
+  "keywords": [ "react", "presentation", "react-presentation", "reveal.js" ],
+  "author": "Frank Lyder Bredland <fl@nyggen.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheKnarf/react-presentation/issues"
+  },
+  "homepage": "https://github.com/TheKnarf/react-presentation#readme"
+}
