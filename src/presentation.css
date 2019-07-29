@@ -1,0 +1,46 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.presentation {
+	display: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	font-size: 3vh;
+}
+
+.presentation .slide > * {
+	text-align: center;
+}
+
+.presentation h1 {
+	font-size: 10vh;
+}
+
+.presentation h2 {
+	font-size: 6vh;
+}
+
+.presentation p {
+	font-size: 4vh;
+}
+
+.presentation ul {
+	text-align: left !important;
+	margin-left: 40vw;
+}
+
+.presentation footer {
+	position: fixed;
+	bottom: 0;
+	padding: 50px;
+}
+
+.presentation .leftAlign {
+	text-align: left !important;
+}
