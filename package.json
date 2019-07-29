@@ -4,17 +4,28 @@
   "description": "A reveal.js insipired component library for building presentations in React",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:page": "ravendesk build",
+    "dev:page": "ravendesk dev"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheKnarf/react-presentation.git"
   },
-  "keywords": [ "react", "presentation", "react-presentation", "reveal.js" ],
+  "keywords": [
+    "react",
+    "presentation",
+    "react-presentation",
+    "reveal.js"
+  ],
   "author": "Frank Lyder Bredland <fl@nyggen.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/TheKnarf/react-presentation/issues"
   },
-  "homepage": "https://github.com/TheKnarf/react-presentation#readme"
+  "homepage": "https://github.com/TheKnarf/react-presentation#readme",
+  "dependencies": {
+    "@ravendesk/cli": "./packages/ravendesk-cli",
+    "@ravendesk/preset-blog": "./packages/ravendesk-preset-blog"
+  }
 }
