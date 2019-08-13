@@ -1,7 +1,7 @@
 # Custom
 dist/
 build/
-
+lib/
 
 # Created by https://www.gitignore.io/api/vim,node,linux,macos,emacs,windows,sublimetext,intellij+all
 # Edit at https://www.gitignore.io/?templates=vim,node,linux,macos,emacs,windows,sublimetext,intellij+all
