@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, cloneElement } from 'react';
+import React, { useEffect, useReducer, useContext, cloneElement } from 'react';
 import * as ducks from './presentation.ducks';
 export { ducks };
 
@@ -34,8 +34,10 @@ export const defaultKeyMapping = [
 	{  action: jumpToStart,    key: keyCodes.Digit0      },
 ];
 
+const PresentationContext = React.createContext();
+
 export const Presentation = ({ children, keyMappings = defaultKeyMapping }) => {
-	const [state, dispatch] = useReducer(ducks.default);
+	const [state, dispatch] = useReducer(ducks.default, ducks.defaultState);
 
 	useEffect(() => {
 		function listener(event) {
@@ -45,6 +47,7 @@ export const Presentation = ({ children, keyMappings = defaultKeyMapping }) => {
 				);
 
 			if(typeof ret !== 'undefined' && typeof ret.action !== 'undefined') {
+				console.log(ret.action(), state);
 				dispatch(ret.action());
 			}
 		}
@@ -56,12 +59,20 @@ export const Presentation = ({ children, keyMappings = defaultKeyMapping }) => {
 		};
 	});
 
-	return <div className="presentation">
-		{ children }
-	</div>;
+	return <PresentationContext.Provider value={{ state }}>
+		<div className="presentation">
+			{ children }
+		</div>
+	</PresentationContext.Provider>
 };
 
-export const Slideset = ({ children, i, slideset }) => {
+export const Slideset = ({ children, i }) => {
+	const { state } = useContext(PresentationContext);
+	if(typeof state === 'undefined')
+		return null;
+
+	const { slideset } = state;
+
 	return <div className="slideset" style={{ display: i === slideset ? 'block' : 'none' }}>
 	{
       React.Children
@@ -71,7 +82,14 @@ export const Slideset = ({ children, i, slideset }) => {
 	</div>;
 };
 
-export const Slide = ({ children, i, slide }) =>
-	<div className="slide" style={{ display: i === slide ? 'block' : 'none' }}>
+export const Slide = ({ children, i }) => {
+	const { state } = useContext(PresentationContext);
+	if(typeof state === 'undefined')
+		return null;
+
+	const { slide } = state;
+
+	return <div className="slide" style={{ display: i === slide ? 'block' : 'none' }}>
 	{ children }
 	</div>;
+}

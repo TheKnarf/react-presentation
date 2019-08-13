@@ -8,7 +8,7 @@ const EXIT_FULLSCREEN = 'EXIT_FULLSCREEN'; // Aka esc key
 const JUMP_TO_START   = 'JUMP_TO_START';   // Aka 0 key
 
 // Default state
-const defaultState = {
+export const defaultState = {
 	fullscreen: false,
 	slideset: 0,
 	slide: 0,
