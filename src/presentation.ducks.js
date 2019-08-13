@@ -36,13 +36,20 @@ export const prevSlide      = () => ({ type: PREV_SLIDE      });
 export const jumpToStart    = () => ({ type: JUMP_TO_START });
 
 export const fullscreen     = () => {
-	const el = document.documentElement,
-			rfs = el.requestFullscreen
-				|| el.webkitRequestFullScreen
-				|| el.mozRequestFullScreen
-				|| el.msRequestFullscreen;
+	try {
+		const el = document.documentElement,
+				rfs = el.requestFullscreen
+					|| el.webkitRequestFullScreen
+					|| el.mozRequestFullScreen
+					|| el.msRequestFullscreen;
 
-	rfs.call(el);
+		const val = rfs.call(el);
+		if(typeof val.catch !== 'undefined') {
+			val.catch(e => console.error(e));
+		}
+	} catch(e) {
+		console.error(e);
+	}
 
 	return { type: FULLSCREEN };
 }

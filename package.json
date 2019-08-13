@@ -5,7 +5,10 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir lib --source-maps inline",
+    "build": "npm run build:babel && npm run build:css",
+	 "build:watch": "npm run build:babel -- --watch && npm run build:css",
+	 "build:babel": "babel src --out-dir lib --source-maps inline",
+	 "build:css": "cp src/*.css lib/",
     "prepublish": "rm -rf ./lib && npm run build"
   },
   "repository": {

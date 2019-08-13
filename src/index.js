@@ -2,8 +2,6 @@ import React, { useEffect, useReducer, useContext, cloneElement } from 'react';
 import * as ducks from './presentation.ducks';
 export { ducks };
 
-//import './presentation.css';
-
 import {
 	nextSlideset,
 	prevSlideset,
@@ -47,15 +45,16 @@ export const Presentation = ({ children, keyMappings = defaultKeyMapping }) => {
 				);
 
 			if(typeof ret !== 'undefined' && typeof ret.action !== 'undefined') {
-				console.log(ret.action(), state);
+				//console.log(ret.action(), state);
 				dispatch(ret.action());
+				event.preventDefault();
 			}
 		}
 
-		document.addEventListener('keyup', listener);
+		document.addEventListener('keydown', listener);
 		
 		return () => {
-			document.removeEventListener('keyup', listener);
+			document.removeEventListener('keydown', listener);
 		};
 	});
 
