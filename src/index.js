@@ -1,4 +1,4 @@
-import React, { useEffect, cloneElement } from 'react';
+import React, { useEffect, useReducer, cloneElement } from 'react';
 import * as ducks from './presentation.ducks';
 export { ducks };
 
@@ -34,7 +34,9 @@ export const defaultKeyMapping = [
 	{  action: jumpToStart,    key: keyCodes.Digit0      },
 ];
 
-export const Presentation = ({ children, dispatch, keyMappings = defaultKeyMapping }) => {
+export const Presentation = ({ children, keyMappings = defaultKeyMapping }) => {
+	const [state, dispatch] = useReducer(ducks.default);
+
 	useEffect(() => {
 		function listener(event) {
 			const ret = keyMappings

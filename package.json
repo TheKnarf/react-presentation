@@ -2,7 +2,7 @@
   "name": "react-presentation",
   "version": "0.1.0",
   "description": "A reveal.js insipired component library for building presentations in React",
-  "main": "dist/index.js",
+  "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
@@ -36,5 +36,8 @@
     "react-dom": ">=16.9.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
