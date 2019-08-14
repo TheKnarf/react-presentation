@@ -1,10 +1,11 @@
 import React, { useEffect, useReducer, useContext, cloneElement } from 'react';
 import * as ducks from './presentation.ducks';
 export { ducks };
+import * as R from 'ramda';
 
 import {
-	nextSlideset,
-	prevSlideset,
+	popSlide,
+	pushSlide,
 	nextSlide,
 	prevSlide,
 	fullscreen,
@@ -23,10 +24,10 @@ const keyCodes = {
 }
 
 export const defaultKeyMapping = [
-	{	action: nextSlideset,   key: keyCodes.ArrowRight  },
-	{  action: prevSlideset,   key: keyCodes.ArrowLeft   },
-	{  action: nextSlide,      key: keyCodes.ArrowDown   },
-	{  action: prevSlide,      key: keyCodes.ArrowUp     },
+	{	action: nextSlide,      key: keyCodes.ArrowRight  },
+	{  action: prevSlide,      key: keyCodes.ArrowLeft   },
+	{  action: pushSlide,      key: keyCodes.ArrowDown   },
+	{  action: popSlide,       key: keyCodes.ArrowUp     },
 	{  action: fullscreen,     key: keyCodes.KeyF,      ctrlKey: true },
 	{  action: exitFullscreen, key: keyCodes.Escape      },
 	{  action: jumpToStart,    key: keyCodes.Digit0      },
@@ -45,7 +46,6 @@ export const Presentation = ({ children, keyMappings = defaultKeyMapping }) => {
 				);
 
 			if(typeof ret !== 'undefined' && typeof ret.action !== 'undefined') {
-				//console.log(ret.action(), state);
 				dispatch(ret.action());
 				event.preventDefault();
 			}
@@ -60,35 +60,29 @@ export const Presentation = ({ children, keyMappings = defaultKeyMapping }) => {
 
 	return <PresentationContext.Provider value={{ state }}>
 		<div className="presentation">
-			{ children }
+			{
+				React.Children
+				     .toArray(children)
+				     .map((child, i) => cloneElement(child, { key: i, path: i }))
+			}
 		</div>
 	</PresentationContext.Provider>
 };
 
-export const Slideset = ({ children, i }) => {
-	const { state } = useContext(PresentationContext);
-	if(typeof state === 'undefined')
-		return null;
-
-	const { slideset } = state;
-
-	return <div className="slideset" style={{ display: i === slideset ? 'block' : 'none' }}>
-	{
-      React.Children
-           .toArray(children)
-           .map((child, i) => cloneElement(child, { key: i, i }))
-	}
-	</div>;
-};
-
-export const Slide = ({ children, i }) => {
+const Slide = ({ children, path }) => {
 	const { state } = useContext(PresentationContext);
 	if(typeof state === 'undefined')
 		return null;
 
 	const { slide } = state;
 
-	return <div className="slide" style={{ display: i === slide ? 'block' : 'none' }}>
-	{ children }
+	return <div className="slide" style={{ display: slide == path ? 'block' : 'none' }}>
+	{
+      React.Children
+           .toArray(children)
+           .map((child, i) => cloneElement(child, { key: i, path }))
+	}
 	</div>;
 }
+
+export { Slide };
