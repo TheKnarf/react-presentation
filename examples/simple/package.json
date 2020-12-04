@@ -34,6 +34,6 @@
   },
   "devDependencies": {
     "gh-pages": "^2.1.1",
-    "highlight.js": "^9.15.9"
+    "highlight.js": "^10.4.1"
   }
 }
